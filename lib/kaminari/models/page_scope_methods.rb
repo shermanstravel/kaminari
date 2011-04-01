@@ -33,5 +33,13 @@ module Kaminari
     def last_page?
       current_page >= num_pages
     end
+    
+    # Set the name of the column to use during .count()
+    # Setting this will cause call to count to use: count(:id, :distinct => true)
+    # Example: User.page(3).per(5).use_distinct(:id)
+    def use_distinct(column)
+      @distinct_column = column
+      self
+    end
   end
 end

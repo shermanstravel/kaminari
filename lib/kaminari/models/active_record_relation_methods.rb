@@ -9,7 +9,7 @@ module Kaminari
     end
     
     def current_page_count #:nodoc:
-      count
+      size
     end
 
     def total_count #:nodoc:

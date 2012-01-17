@@ -23,26 +23,20 @@ module Kaminari
         # Remove includes only if they are irrelevant
         c = c.except(:includes) unless references_eager_loaded_tables?
 
-        # a workaround to count the actual model instances on distinct query because count + distinct returns wrong value in some cases. see https://github.com/amatsuda/kaminari/pull/160
-        uses_distinct_sql_statement = c.to_sql =~ /DISTINCT/i
-        if uses_distinct_sql_statement
-          c.length
+        if distinct_column_name.nil?
+          c = c.count
         else
-          if distinct_column_name.nil?
-            c = c.count
-          else  
-            c = c.count(distinct_column_name, :distinct => true)
-          end
-          # .group returns an OrderdHash that responds to #count
-          c.respond_to?(:count) ? c.count : c
+          c = c.count(distinct_column_name, :distinct => true)
         end
+        # .group returns an OrderdHash that responds to #count
+        c.respond_to?(:count) ? c.count : c
       end
-
-      # Get the column name used in distinct query.
-      # This could have been set on the Model class, or the ActiveRecord::Relation 
-      def distinct_column_name
-        @distinct_column || distinct_column
-      end
+    end
+    
+    # Get the column name used in distinct query.
+    # This could have been set on the Model class, or the ActiveRecord::Relation 
+    def distinct_column_name
+      @distinct_column || distinct_column
     end
   end
 end

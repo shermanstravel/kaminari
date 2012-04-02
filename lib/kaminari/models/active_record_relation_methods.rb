@@ -7,9 +7,9 @@ module Kaminari
         limit_value ? length : super
       end
     end
-    
+
     def current_page_count #:nodoc:
-      size
+      to_a.size
     end
 
     def total_count #:nodoc:
@@ -32,9 +32,9 @@ module Kaminari
         c.respond_to?(:count) ? c.count : c
       end
     end
-    
+
     # Get the column name used in distinct query.
-    # This could have been set on the Model class, or the ActiveRecord::Relation 
+    # This could have been set on the Model class, or the ActiveRecord::Relation
     def distinct_column_name
       @distinct_column || distinct_column
     end

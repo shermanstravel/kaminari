@@ -1,48 +1,30 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: true
 $:.push File.expand_path("../lib", __FILE__)
 require "kaminari/version"
 
-Gem::Specification.new do |s|
-  s.name        = 'kaminari'
-  s.version     = Kaminari::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Akira Matsuda']
-  s.email       = ['ronnie@dio.jp']
-  s.homepage    = 'https://github.com/amatsuda/kaminari'
-  s.summary     = 'A pagination engine plugin for Rails 3 or other modern frameworks'
-  s.description = 'Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 3'
+Gem::Specification.new do |spec|
+  spec.name        = 'kaminari'
+  spec.version     = Kaminari::VERSION
+  spec.authors     = ['Akira Matsuda', 'Yuki Nishijima', 'Zachary Scott', 'Hiroshi Shibata']
+  spec.email       = ['ronnie@dio.jp']
+  spec.homepage    = 'https://github.com/kaminari/kaminari'
+  spec.summary     = 'A pagination engine plugin for Rails 4+ and other modern frameworks'
+  spec.description = 'Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+'
+  spec.license       = "MIT"
 
-  s.rubyforge_project = 'kaminari'
+  spec.files         = `git ls-files | egrep -v 'kaminari-(core|actionview|activerecord)' | grep -v '^test'`.split("\n")
+  spec.require_paths = ['lib']
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.extra_rdoc_files = ['README.rdoc']
-  s.require_paths = ['lib']
+  spec.required_ruby_version = '>= 2.0.0'
 
-  s.licenses = ['MIT']
+  spec.add_dependency 'activesupport', '>= 4.1.0'
+  spec.add_dependency 'kaminari-core', Kaminari::VERSION
+  spec.add_dependency 'kaminari-actionview', Kaminari::VERSION
+  spec.add_dependency 'kaminari-activerecord', Kaminari::VERSION
 
-  %w{ activesupport actionpack railties }.each do |gem|
-    s.add_dependency gem, ['>= 3.0.0']
-  end
-  s.add_development_dependency 'bundler', ['>= 1.0.0']
-  s.add_development_dependency 'sqlite3', ['>= 0']
-  %w{ activerecord activemodel }.each do |gem|
-    s.add_development_dependency gem, ['>= 3.0.0']
-  end
-  s.add_development_dependency 'sinatra', ['>= 1.3']
-  s.add_development_dependency 'mongoid', ['>= 2']
-  s.add_development_dependency 'mongo_mapper', ['>= 0.9']
-  s.add_development_dependency 'dm-core', ['>= 1.1.0']
-  s.add_development_dependency 'dm-migrations', ['>= 1.1.0']
-  s.add_development_dependency 'dm-aggregates', ['>= 1.1.0']
-  s.add_development_dependency 'dm-sqlite-adapter', ['>= 1.1.0']
-  s.add_development_dependency 'rspec', ['>= 0']
-  s.add_development_dependency 'rspec-rails', ['>= 0']
-  s.add_development_dependency 'rr', ['>= 0']
-  s.add_development_dependency 'capybara', ['>= 1.0']
-  s.add_development_dependency 'database_cleaner', ['>= 0']
-  s.add_development_dependency 'padrino-helpers', ['~> 0.10']
-  s.add_development_dependency 'rack-test', ['>= 0']
-  s.add_development_dependency 'sinatra-contrib', ['~> 1.3']
-  s.add_development_dependency 'nokogiri', ['>= 0']
+  spec.add_development_dependency 'test-unit-rails'
+  spec.add_development_dependency 'bundler', '>= 1.0.0'
+  spec.add_development_dependency 'rake', '>= 0'
+  spec.add_development_dependency 'rr', '>= 0'
+  spec.add_development_dependency 'capybara', '>= 1.0'
 end

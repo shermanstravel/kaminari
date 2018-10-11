@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Kaminari
-  VERSION = '0.13.0'
+  VERSION = '1.1.1'
 end
